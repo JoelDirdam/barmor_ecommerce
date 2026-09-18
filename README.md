@@ -3,6 +3,9 @@
 Plantilla de tienda en línea para **Barmor · Estilo Ranch Vaquera** (Durango, México),
 construida a partir de `DESIGN.md` (sistema de diseño "Rancho moderno").
 
+**Demo en vivo:** https://web-production-04a89.up.railway.app
+**Repo:** https://github.com/JoelDirdam/barmor_ecommerce
+
 Es **solo el front-end**: no hay backend, base de datos ni pasarela de pago. El catálogo
 vive en archivos TypeScript y el carrito en `localStorage`. Está pensada para mostrársela
 al dueño y, si aprueba, seguir con el desarrollo real.
@@ -103,6 +106,9 @@ Si prefieres Nixpacks en lugar de Docker, borra el `Dockerfile` y deja que Railw
 `npm run build` + `npm run preview` (el script ya escucha en `0.0.0.0` y respeta `PORT`).
 
 No hay variables de entorno obligatorias.
+
+Ya está desplegado en el proyecto `barmor_ecommerce` (servicio `web`, entorno
+`production`). Railway reconstruye y vuelve a publicar en cada push a `main`.
 
 ## Lo que falta para que sea una tienda de verdad
 
