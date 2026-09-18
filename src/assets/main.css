@@ -1,0 +1,231 @@
+@import 'tailwindcss';
+
+/* =========================================================================
+   Barmor — Design tokens (DESIGN.md §2)
+   Los tokens semánticos viven en :root / .dark y Tailwind los consume con
+   `@theme inline`, así el modo oscuro es un cambio de variable, no un
+   duplicado de clases.
+   ========================================================================= */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --c-bg: #f7f1e6; /* Sand Canvas   */
+  --c-surface: #ffffff; /* Hide White    */
+  --c-ink: #2b211a; /* Saddle Ink    */
+  --c-ink-soft: #6b5b4d; /* texto secundario derivado */
+  --c-leather: #7a4b2e; /* Talabartero   */
+  --c-denim: #2e3a4e; /* Mezclilla     */
+  --c-terracotta: #c1552c; /* Terracota     */
+  --c-sage: #7c8a6e; /* Nopal Sage    */
+  --c-amber: #e0912f; /* Amber Sunset  */
+  --c-rust: #b23b2e; /* Rust Alert    */
+  --c-line: #dccfb8; /* Rawhide Line  */
+  --c-scrim: 43 33 26; /* rgb de --c-ink para scrims */
+  /* Texto sobre ámbar/terracota: fijo en ambos temas porque el blanco sobre
+     ámbar da 2.1:1 y el DESIGN.md §6 lo prohíbe */
+  --c-on-accent: #2b211a;
+}
+
+.dark {
+  --c-bg: #1b1712;
+  --c-surface: #241e17;
+  --c-ink: #f4ece0;
+  --c-ink-soft: #b7a894;
+  --c-leather: #a9704a;
+  --c-denim: #202836;
+  --c-terracotta: #d0673c;
+  --c-sage: #94a385;
+  --c-amber: #e8a24a;
+  --c-rust: #d2564a;
+  --c-line: #3b322a;
+  --c-scrim: 12 10 8;
+  --c-on-accent: #23190f;
+}
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-ink-soft: var(--c-ink-soft);
+  --color-leather: var(--c-leather);
+  --color-denim: var(--c-denim);
+  --color-terracotta: var(--c-terracotta);
+  --color-sage: var(--c-sage);
+  --color-amber: var(--c-amber);
+  --color-rust: var(--c-rust);
+  --color-line: var(--c-line);
+  --color-on-accent: var(--c-on-accent);
+
+  --font-display: 'Fraunces', 'Tiempos Headline', Georgia, serif;
+  --font-sans: 'Inter', 'General Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* Breakpoints del DESIGN.md §3 */
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 900px;
+  --breakpoint-lg: 1280px;
+  --breakpoint-xl: 1440px;
+
+  --radius-card: 8px;
+  --container-page: 1440px;
+
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* =========================================================================
+   Base
+   ========================================================================= */
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--c-bg);
+    color: var(--c-ink);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  @media (width >= 900px) {
+    body {
+      font-size: 16px;
+    }
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    letter-spacing: 0; /* §2.2: nunca tracking en titulares */
+  }
+
+  /* Focus visible: 2px ámbar con offset (§6) — nunca outline:none sin reemplazo */
+  :focus-visible {
+    outline: 2px solid var(--c-amber);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--c-amber);
+    color: var(--c-ink);
+  }
+}
+
+/* =========================================================================
+   Utilidades propias
+   ========================================================================= */
+
+@utility container-page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 600px) {
+    padding-inline: 1.25rem;
+  }
+  @media (width >= 900px) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Cifras tabulares para precios (§2.2) */
+@utility nums-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* Titulares fluidos */
+@utility text-hero {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 1.25rem + 4vw, 4rem);
+  line-height: 1.05;
+}
+
+@utility text-section {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.5rem);
+  line-height: 1.2;
+}
+
+/* Costura: adorno permitido (§1.2) */
+@utility stitch {
+  border: 1px dashed color-mix(in srgb, var(--c-leather) 45%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--c-line) 70%, transparent);
+  outline-offset: 3px;
+}
+
+/* Scrim fotográfico de abajo hacia arriba, nunca bloque plano (§4.2) */
+@utility scrim-photo {
+  background-image: linear-gradient(
+    to top,
+    rgb(var(--c-scrim) / 0.72) 0%,
+    rgb(var(--c-scrim) / 0.42) 38%,
+    rgb(var(--c-scrim) / 0.05) 72%,
+    transparent 100%
+  );
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility pb-safe {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+/* Skeletons (§5): shimmer de --color-line sobre --color-surface */
+@utility skeleton {
+  background-color: var(--c-surface);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--c-line) 85%, transparent) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: barmor-shimmer 1.4s linear infinite;
+}
+
+@keyframes barmor-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes barmor-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* =========================================================================
+   Movimiento reducido (§5 / §6)
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

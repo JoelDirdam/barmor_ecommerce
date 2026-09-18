@@ -1,0 +1,29 @@
+{
+  "name": "barmor-store",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Plantilla e-commerce (Vue 3 + Vite + Tailwind) para Barmor — Estilo Ranch Vaquera",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --build && vite build",
+    "build:only": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port ${PORT:-4173}",
+    "typecheck": "vue-tsc --build"
+  },
+  "dependencies": {
+    "pinia": "^3.0.3",
+    "vue": "^3.5.18",
+    "vue-i18n": "^11.1.7",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/node": "^22.15.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "tailwindcss": "^4.1.11",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.0",
+    "vue-tsc": "^3.0.1"
+  }
+}

@@ -1,0 +1,78 @@
+import type { Category } from '@/types'
+
+export const categories: Category[] = [
+  {
+    slug: 'sombreros',
+    name: 'Sombreros',
+    nameEn: 'Hats',
+    icon: 'hat',
+    texture: 'palma',
+    blurb: 'Palma tejida y fieltro, horma clásica del norte.',
+    blurbEn: 'Woven palm and felt, classic northern crown.',
+  },
+  {
+    slug: 'cachuchas',
+    name: 'Cachuchas',
+    nameEn: 'Caps',
+    icon: 'cap',
+    texture: 'cotton',
+    blurb: 'Gorras de lona y malla con parche bordado.',
+    blurbEn: 'Canvas and mesh caps with embroidered patch.',
+  },
+  {
+    slug: 'camisas',
+    name: 'Camisas',
+    nameEn: 'Shirts',
+    icon: 'shirt',
+    texture: 'cotton',
+    blurb: 'Yugo vaquero, broche de presión, corte real.',
+    blurbEn: 'Western yoke, snap buttons, true fit.',
+  },
+  {
+    slug: 'chivarras',
+    name: 'Chivarras',
+    nameEn: 'Chaps',
+    icon: 'chaps',
+    texture: 'suede',
+    blurb: 'Piel de chivo y vaqueta, herrajes de latón.',
+    blurbEn: 'Goat hide and vaqueta, brass hardware.',
+  },
+  {
+    slug: 'jeans',
+    name: 'Jeans',
+    nameEn: 'Denim',
+    icon: 'jeans',
+    texture: 'denim',
+    blurb: 'Mezclilla rígida de 13 oz, corte bota.',
+    blurbEn: '13 oz rigid denim, bootcut leg.',
+  },
+  {
+    slug: 'botas',
+    name: 'Botas',
+    nameEn: 'Boots',
+    icon: 'boot',
+    texture: 'leather',
+    blurb: 'Suela cosida, horma puntal y redonda.',
+    blurbEn: 'Stitched sole, snip and round toe.',
+  },
+  {
+    slug: 'accesorios',
+    name: 'Accesorios',
+    nameEn: 'Accessories',
+    icon: 'belt',
+    texture: 'metal',
+    blurb: 'Cintos piteados, hebillas y carteras.',
+    blurbEn: 'Tooled belts, buckles and wallets.',
+  },
+  {
+    slug: 'ofertas',
+    name: 'Ofertas',
+    nameEn: 'Sale',
+    icon: 'tag',
+    texture: 'leather',
+    blurb: 'Última talla, mismo trabajo a mano.',
+    blurbEn: 'Last sizes, same handwork.',
+  },
+]
+
+export const categoryBySlug = (slug: string) => categories.find((c) => c.slug === slug)

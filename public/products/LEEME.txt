@@ -1,0 +1,1 @@
+Sube aquí las fotos de producto (4:5, WebP o JPG) y lista las rutas en src/data/products.ts
